@@ -42,6 +42,28 @@ body{
   outline: none;
 }
 
+.google .email{
+  border: 1px solid rgb(199, 199, 199);
+  border-radius: 20px;
+  width: fit-content;
+  padding: .1em .6em;
+  margin: auto auto;
+}
+
+.google .email i {
+  border: 2px solid rgb(61, 61, 61);
+  color: rgb(61, 61, 61);;
+  border-radius: 50%;
+  padding: .1em;
+  font-size: 13px;
+  overflow: hidden;
+  margin-right: .7em;
+  transform: translateY(2px);
+  padding-top: .4em;
+  width: 20px;
+  height: 20px;
+}
+
 .google .blue{
   color: rgb(26,115,232);
   font-size: 14px;
