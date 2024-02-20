@@ -51,13 +51,13 @@ body{
   font-size: 14px;
 }
 
-.google .error{
+.google .error, .recap_error{
   color: red;
   font-size: 12px;
   display: none;
 }
 
-.google .error.show{
+.google .error.show, .recap_error.show{
   display: block;
 }
 
